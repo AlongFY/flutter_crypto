@@ -5,6 +5,9 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttercrypto/des/des.dart';
 import 'package:fluttercrypto/util/crypto_util.dart';
@@ -24,14 +27,20 @@ void main() {
 
   test('des ecb test', () async {
     //
-    String hexKey = '133457799BBCDFF1';
-    String data = '0123456789ABCDEF';
+    String hexKey = 'C2#I2w*j';
+    hexKey = CryptoUtil.list2Hex(hexKey.codeUnits);
+    String data = '''{
+        "error_code": 0,
+    }''';
 
     String cipher = DES().encryptToHexWithECB(data, hexKey);
     print('cipher $cipher');
-    String plain = DES().decryptFromHexWithECB(cipher, hexKey);
-    print('plain ' + plain.toString());
-
+    String text = 'e6955KPw5ULTr2QEmodPTU5FcndK/n7xnujqjORQcrbcU/hIz1fxPdkrjpkM4Tn6nujqjORQcrY+gRAYOn7ocs191knby4cScZrx23eKlXHnprJ9ZC9XWZa/C/2GE4FdOTkQ5vB7PeYidqRv+PeZRuemsn1kL1dZNxaEiye5gNy2iMTv84aHUgldIN7C1mMa5pB5TZkUy0t4NGKtLwCIqYTMIMYTm/iypXtBQR5cTX1qMzT+weq+vOEREE6As7aoJHffxufH3gupxutsLpTWh920AZCq4wtQefe6+2ca7UM1Ta+kX7uNHDQw/xhYuU83IrhllquUjUYlh4RJtkvrHWyAK2btcEldfxsKnVpRnLBBlldOntu67N7HTX/Ogd1/Xb0OiaMZEfu0d+VEPFuChB6adjrisaU1qQFpTtfLYY8suWYTwaxjI2zNtZg4Q6Fxr+DOlyDFWzadnOX/Fxy4AD1T8GpLMenLjf4DlDF8pdPeHUIsePg+J04oBSZBjyQziws8Sd0weB9aDcPVi5CqC5yQlgXs1FS/sMbg4y8rpKOFgXpC8y78vAfZDB0AY5lxfNEM4dzjDOo/ZfjmQM0B+PwJm7l5iZ6zevyPwqcMelZF+qBWK7NyIGrDU4cSm638rnabvKi18t/w+T0M5YFeROGwRaUQT69QowyXnrkGJXAcPhoKvFL2ZKhZv9k+/UQaCKEZokHyW+ZSpS30dWpgPKzJp62JGSEeyoWUt+7R6cnRVznxEZN34HF6U8q5LboT6RxHEZs6lIQOMY7sUtOn4bxIU6Zp1/F7gXS/qwFFvaIfZgp7jLzuXtShRqYCjNL8N73zfP9Fbf42wSOKNTR80TeafHnARN9aKUa4eX/NRsRqMzT+weq+vGDVgH0j1xGPfJFvwemcrIEFSJ4BXorYyMS/LMVdwocODnhsj3+FkJ6ckVkEIB7OwpD4jsWGsu3k6azV7iFwN5pQIh/9LTd0t+ljPfQR15zM2T61YsW64CVKyuOgag7/zdKduWDx4sKL3S/F7AYkb4VLwpioftdMoZI/NsNpXGDdcYlS8o48/kh4SbD3J4UyE/n8hUEZQckkajM0/sHqvrzdwE5bibVmXQyyRGF2/CYNDjGO7FLTp+HqqbascVBeQj5lO62cEypQ9TBubpXrEk/1xWDSQekHAaecm/+2yiTNakWCZwRdtfHao9qaXnP1VsJTxpGNSmJG4ehGVCHqvRTjdRXBNZTM13Y1mD/pGrFe';
+    // text = CryptoUtil.base64ToHex(text);
+    // List<int> result = DES().decryptWithEcb(HEX.decode(text), CryptoUtil.hex2List(hexKey));
+    String result = DES().decryptFromBase64WithECB(text, 'C2#I2w*j');
+    // utf8.decoder.convert(Uint8List.fromList(result));
+    print('----$result');
     ///多数在线加密网站的key使用的是utf-8格式 这里是十六进制格式
     String testKey = 'asfd1234';
     print('网站测试key: $testKey');

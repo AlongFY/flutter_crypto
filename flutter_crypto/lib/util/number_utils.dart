@@ -13,7 +13,7 @@ class NumberUtils {
 
   ///字节数组转二进制数组
   static List<int> bitsFromIntList(List<int> ints) {
-    List<int> result = List(ints.length << 3);
+    List<int> result = List.filled(ints.length << 3, 0);
     for (int i = 0; i < (ints.length << 3); ++i) {
       result[i] = (ints[i >> 3] >> (7 - i & 7)) & 1;
     }
@@ -37,7 +37,7 @@ class NumberUtils {
 
   ///to8Bit  01100100
   static List<int> t8Bit(List<int> bytes) {
-    List<int> result = List(8 * bytes.length);
+    List<int> result = List.filled(8 * bytes.length, 0);
     for (int i = 0; i < 8 * bytes.length; ++i) {
       result[i] = (bytes[i >> 3] >> (7 - i & 7)) & 1;
     }
@@ -46,7 +46,7 @@ class NumberUtils {
 
   /// 4 -> 00000100
   static List<int> to8Bit(int num) {
-    List<int> result = List(8);
+    List<int> result = List.filled(8, 0);
     for (int i = 0; i < 8; i++) {
       result[i] = (num >> (7 - i & 7)) & 1;
     }
@@ -66,7 +66,7 @@ class NumberUtils {
 
   /// 4 -> 0100
   static List<int> to4Bit(int num) {
-    List<int> result = List(4);
+    List<int> result = List.filled(4, 0);
     for (int i = 0; i < 4; i++) {
       result[i] = (num >> (3 - i & 3)) & 1;
     }
