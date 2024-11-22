@@ -416,7 +416,7 @@ class DES {
     initKey(key);
     for (int i = 0; i < cipher.length; i += BLOCK_SIZE) {
       if (i == cipher.length - BLOCK_SIZE) {
-        plain.addAll(Padding.pkcs7Padding(
+        plain.addAll(Padding.pkcs7UnPadding(
             decryptBlock(cipher.sublist(i, i + BLOCK_SIZE))));
       } else {
         plain.addAll(decryptBlock(cipher.sublist(i, i + BLOCK_SIZE)));
