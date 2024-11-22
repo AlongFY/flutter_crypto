@@ -8,10 +8,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter_crypto/des/des.dart';
+import 'package:flutter_crypto/util/crypto_util.dart';
+import 'package:flutter_crypto/util/number_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluttercrypto/des/des.dart';
-import 'package:fluttercrypto/util/crypto_util.dart';
-import 'package:fluttercrypto/util/number_utils.dart';
 
 void main() {
   test('hex test', () {
